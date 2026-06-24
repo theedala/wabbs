@@ -8,11 +8,13 @@ export function Team() {
   return (
     <section className="py-24">
       <Container>
-        <SectionHeading eyebrow="MANAGEMENT TEAM" title="The people behind ATW." />
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+        <SectionHeading eyebrow="LEADERSHIP" title="Meet the founder." />
+        <div className="mt-12 flex flex-wrap justify-center gap-8">
           {team.map((m, i) => (
             <Reveal key={m.name} delay={i * 0.1}>
-              <TeamCard member={m} />
+              <div className="w-full max-w-xs">
+                <TeamCard member={m} />
+              </div>
             </Reveal>
           ))}
         </div>
