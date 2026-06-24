@@ -95,7 +95,7 @@ web/
 Run from repo root (`C:/Users/cni.alad/Desktop/Wabbs`):
 
 ```bash
-npx --yes create-next-app@latest web --ts --tailwind --eslint --app --src-dir --import-alias "@/*" --no-turbopack --use-npm
+npx --yes create-next-app@latest web --ts --tailwind --eslint --app --src-dir --import-alias "@/*" --use-npm --yes
 ```
 
 Accept defaults for any remaining prompts.
@@ -331,7 +331,9 @@ export const hero = {
     "ATW Technologies and Forensics builds AI-driven intrusion detection, cybersecurity consulting, and digital forensics for institutions across Zimbabwe.",
 };
 
-export const problemStats = [
+export type Stat = { value: number; prefix?: string; suffix?: string; label: string };
+
+export const problemStats: Stat[] = [
   { value: 96, suffix: "%", label: "of financial transactions are now conducted online." },
   { value: 24, prefix: "$", suffix: "M", label: "lost by the Harare Institute of Technology after its payment system was breached by an insider developer." },
 ];
