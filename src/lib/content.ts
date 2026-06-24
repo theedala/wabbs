@@ -84,8 +84,6 @@ export const whyATW = {
 
 export const team = [
   { name: "Alexandra Wabatagore", role: "CEO & Founder · Digital Forensic Scientist", photo: "/team/alexandra.jpg" },
-  { name: "Wayne Mureverwi", role: "Digital Forensic Scientist & Software Developer", photo: "/team/wayne.jpg" },
-  { name: "Tarbaby Banda", role: "Senior Software Engineer", photo: "/team/tarbaby.jpg" },
 ];
 
 export const contact = {
@@ -94,3 +92,20 @@ export const contact = {
   phoneHref: "+263771127760",
   location: "Harare, Zimbabwe",
 };
+
+export type SocialIconName = "linkedin" | "x" | "facebook" | "instagram" | "whatsapp";
+export type Social = { label: string; href: string; icon: SocialIconName };
+
+// hrefs intentionally left as "#" placeholders — fill in when the accounts exist.
+export const socials: Social[] = [
+  { label: "LinkedIn", href: "#", icon: "linkedin" },
+  { label: "X", href: "#", icon: "x" },
+  { label: "Facebook", href: "#", icon: "facebook" },
+  { label: "Instagram", href: "#", icon: "instagram" },
+  { label: "WhatsApp", href: "#", icon: "whatsapp" },
+];
+
+export const legalLinks = [
+  { label: "Privacy", href: "#" },
+  { label: "Terms", href: "#" },
+];
