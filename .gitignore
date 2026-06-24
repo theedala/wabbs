@@ -1,0 +1,4 @@
+_unpack/
+node_modules/
+.next/
+.env*.local
