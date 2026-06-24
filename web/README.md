@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ATW Technologies & Forensics — Website
 
-## Getting Started
+Next.js (App Router) brochure site for ATW Technologies and Forensics.
 
-First, run the development server:
+## Local development
 
 ```bash
+cd web
+cp .env.local.example .env.local   # fill in RESEND_API_KEY
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run dev` — start the dev server
+- `npm run build` — production build
+- `npm run start` — serve the production build
+- `npm run lint` — ESLint
+- `npm run typecheck` — TypeScript check
+- `npm test` — Vitest unit tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+- `RESEND_API_KEY` — from https://resend.com (required for the contact form to send)
+- `CONTACT_TO` — destination inbox (default `alexandrawabbs@gmail.com`)
+- `CONTACT_FROM` — verified Resend sender (default `onboarding@resend.dev`)
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy (Vercel)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Import the repo into Vercel.
+2. Set **Root Directory** to `web`.
+3. Add the env vars above in Project Settings.
+4. Deploy, then point the custom domain and update the `metadataBase` in
+   `src/app/layout.tsx` and the base URLs in `src/app/sitemap.ts` / `src/app/robots.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Confirm before launch
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Team photos:** verify the Wayne/Tarbaby headshot mapping in `public/team/`.
+- **Domain:** replace `https://atwtechnologies.example` everywhere once chosen.
+- **Resend:** create an account and verify a sender domain for production email.
