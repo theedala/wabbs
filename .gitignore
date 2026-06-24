@@ -2,3 +2,6 @@ _unpack/
 node_modules/
 .next/
 .env*.local
+
+# screenshots / scratch
+web/_shots/
