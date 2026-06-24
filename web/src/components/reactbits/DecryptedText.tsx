@@ -10,10 +10,8 @@ export function DecryptedText({ text, className = "" }: { text: string; classNam
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplay(text);
-      return;
-    }
+    // Initial state already equals `text`, so reduced-motion needs no update.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let frame = 0;
     let raf = 0;
     const total = text.length;

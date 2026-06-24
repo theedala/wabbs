@@ -17,25 +17,24 @@ export function CountUp({
   const started = useRef(false);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setValue(end);
-      return;
-    }
     const el = ref.current;
     if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const tick = (now: number) => {
-            const p = Math.min((now - start) / durationMs, 1);
-            setValue(Math.round(end * (1 - Math.pow(1 - p, 3))));
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
+        if (!entries[0].isIntersecting || started.current) return;
+        started.current = true;
+        if (reduce) {
+          setValue(end);
+          return;
         }
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / durationMs, 1);
+          setValue(Math.round(end * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
       },
       { threshold: 0.4 }
     );
