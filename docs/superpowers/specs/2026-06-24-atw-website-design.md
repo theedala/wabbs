@@ -30,7 +30,8 @@ and has an obvious, low-friction path to enquire.
 
 - **Framework:** Next.js (App Router) + TypeScript.
 - **Styling:** Tailwind CSS.
-- **Animation:** Framer Motion — restrained scroll reveals and hover states only.
+- **Animation:** Framer Motion for base scroll reveals/hover states, plus **React Bits**
+  (reactbits.dev) copy-paste components for signature animated pieces (see §11).
 - **Icons:** lucide-react.
 - **Contact delivery:** Next.js route handler (`/api/contact`) using **Resend** to email
   `alexandrawabbs@gmail.com`. API key stored in `RESEND_API_KEY` env var. Includes a honeypot
@@ -149,7 +150,9 @@ Each component has one clear purpose and a typed props interface:
 - `TeamCard` — photo, name, role.
 - `CTABand` — full-width gradient prompt.
 - `ContactForm` — fields, validation, submit state.
-- `NetworkGraph` — animated SVG/canvas circuit-line motif (decorative, reduced-motion aware).
+
+Decorative animated pieces (hero backdrop, stat counters, etc.) are provided by React Bits
+components rather than hand-built — see §11.
 
 Shared UI primitives: `Button`, `Container`, `Badge`.
 
@@ -175,12 +178,37 @@ Redline, Fingerprint) and 2026 design roundups:
 - **Trust without client logos** → ATW substitutes team credentials/photos, local presence,
   named threats stopped, transparent pricing, and the discount commitment.
 
-## 11. Out of Scope (YAGNI)
+## 11. Animations (React Bits)
+
+React Bits components are copy-pasted in (CLI/copy) and themed to the ATW palette. Used "where
+necessary" — signature moments only, never wall-to-wall. Every animated piece must respect
+`prefers-reduced-motion` (fall back to a static state).
+
+| Location | React Bits component | Purpose |
+|----------|---------------------|---------|
+| Hero background | **Particles** (primary) or **Threads** / **Beams** | Drifting connected-node network backdrop — the circuit motif, animated. Replaces the hand-built `NetworkGraph`. |
+| Hero headline | **DecryptedText** | Security-flavored "decode/scramble-to-clear" reveal on the main headline. On-theme, used once. |
+| Hero tagline | **ShinyText** | Subtle metallic sweep on "You got it solved!" |
+| Problem stats | **CountUp** | Animate the 96% and $24M stat callouts as they scroll into view. |
+| Section eyebrows | **GradientText** | Cyan→blue animated gradient on small section labels. |
+| Service cards | **SpotlightCard** | Cursor-follow spotlight glow on the three service cards (dark-theme friendly). |
+| Why ATW features | **AnimatedContent** / **BlurText** | Staggered scroll reveal of feature rows. |
+| Team members | **ProfileCard** or **TiltedCard** | Interactive team cards with the headshots. |
+| Primary CTA buttons | **StarBorder** | Animated gradient border on "Request a quote" CTAs. |
+
+Notes:
+- Prefer **lightweight DOM/SVG-based** React Bits variants over heavy WebGL ones where a choice
+  exists, to keep the bundle small and performance high on mobile/low-bandwidth Zimbabwean
+  connections. (e.g. Particles over Hyperspeed.)
+- Final selection per slot may be tuned during implementation after seeing them themed; the
+  table is the intended direction, not a hard contract.
+
+## 12. Out of Scope (YAGNI)
 
 Blog/CMS, client login/dashboard, live chat, multi-language, analytics dashboards, e-commerce,
 online payments. All addable later given the stack; excluded from this build.
 
-## 12. Open Questions / Assumptions
+## 13. Open Questions / Assumptions
 
 - **Assumption:** pricing is public (flagged with user; can switch to "request a quote" gating).
 - **Assumption:** copy is lightly rewritten from the deck, not verbatim.
