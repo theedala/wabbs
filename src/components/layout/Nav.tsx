@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { nav, siteMeta } from "@/lib/content";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -47,17 +48,21 @@ export function Nav() {
               {l.label}
             </Link>
           ))}
+          <ThemeToggle />
           <Button href="/contact" arrow>
             Get protected
           </Button>
         </nav>
-        <button
-          className="text-ink md:hidden"
-          aria-label="Toggle menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <ThemeToggle />
+          <button
+            className="text-ink"
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
       </Container>
       {open && (
         <div className="border-t border-border bg-bg md:hidden">
