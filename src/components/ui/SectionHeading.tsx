@@ -1,8 +1,20 @@
-export function SectionHeading({ eyebrow, title, className = "" }: { eyebrow: string; title: string; className?: string }) {
+import { MonoLabel } from "./MonoLabel";
+
+export function SectionHeading({
+  eyebrow,
+  title,
+  className = "",
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div className={className}>
-      <p className="text-gradient font-mono text-xs font-semibold tracking-[0.2em]">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-bold sm:text-4xl">{title}</h2>
+      <MonoLabel className="text-accent">{eyebrow}</MonoLabel>
+      <h2 className="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl">
+        {title}
+      </h2>
     </div>
   );
 }
