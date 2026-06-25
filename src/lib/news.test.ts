@@ -8,13 +8,14 @@ const RSS = `<?xml version="1.0"?>
     <title><![CDATA[Critical RCE patched in WidgetOS]]></title>
     <link>https://example.com/a</link>
     <pubDate>Tue, 24 Jun 2026 10:00:00 +0000</pubDate>
+    <media:content url="https://cdn.example.com/a.jpg" medium="image"/>
     <description><![CDATA[<p>Admins should <b>update</b> now &amp; rotate keys.</p>]]></description>
   </item>
   <item>
     <title>Phishing campaign targets banks</title>
     <link>https://example.com/b</link>
     <pubDate>Mon, 23 Jun 2026 08:00:00 +0000</pubDate>
-    <description>Short summary.</description>
+    <description><![CDATA[<img src="https://cdn.example.com/b.png"/> Short summary.]]></description>
   </item>
 </channel></rss>`;
 
@@ -38,6 +39,12 @@ describe("news parsing", () => {
     expect(items[0].summary).toBe("Admins should update now & rotate keys.");
     expect(items[0].iso).toMatch(/^2026-06-24T/);
     expect(items[0].date).toContain("2026");
+  });
+
+  test("extracts a thumbnail from media:content and from inline img", () => {
+    const items = parseFeed(RSS, "Sample");
+    expect(items[0].image).toBe("https://cdn.example.com/a.jpg");
+    expect(items[1].image).toBe("https://cdn.example.com/b.png");
   });
 
   test("parses Atom entries and alternate link", () => {

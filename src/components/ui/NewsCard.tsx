@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { NewsImage } from "@/components/ui/NewsImage";
 import type { NewsItem } from "@/lib/news";
 
 export function NewsCard({ item }: { item: NewsItem }) {
@@ -7,8 +8,9 @@ export function NewsCard({ item }: { item: NewsItem }) {
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-full flex-col rounded-xl border border-border bg-bg p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-bg p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
     >
+      {item.image && <NewsImage src={item.image} />}
       <div className="flex items-center justify-between gap-3">
         <span className="mono-label text-accent">{item.source}</span>
         <ArrowUpRight className="h-4 w-4 shrink-0 text-muted transition-colors group-hover:text-ink" />

@@ -7,6 +7,7 @@ export type NewsItem = {
   iso: string;
   date: string;
   summary: string;
+  image: string;
 };
 
 export type NewsSource = { name: string; url: string };
@@ -67,6 +68,30 @@ function pickLink(item: Record<string, unknown>): string {
   return item.id ? asText(item.id) : "";
 }
 
+function firstAttr(v: unknown, attr: string): string {
+  const node = Array.isArray(v) ? v[0] : v;
+  if (node && typeof node === "object") {
+    return String((node as Record<string, unknown>)[attr] ?? "");
+  }
+  return "";
+}
+
+/** Pull a thumbnail URL from the feed item (media tags, enclosure, or inline img). */
+function extractImage(item: Record<string, unknown>, rawHtml: string): string {
+  const media = firstAttr(item["media:content"], "@_url") || firstAttr(item["media:thumbnail"], "@_url");
+  if (media) return media;
+
+  const enc = item.enclosure;
+  const encList = (Array.isArray(enc) ? enc : enc ? [enc] : []) as Record<string, string>[];
+  const imgEnc = encList.find((e) => String(e?.["@_type"] ?? "").startsWith("image")) ?? encList[0];
+  if (imgEnc?.["@_url"]) return imgEnc["@_url"];
+
+  const m = rawHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (m && /^https?:\/\//i.test(m[1])) return m[1];
+
+  return "";
+}
+
 function formatDate(d: Date): string {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -99,10 +124,10 @@ export function parseFeed(xml: string, source: string): NewsItem[] {
       );
       const d = new Date(dateRaw);
       const valid = !Number.isNaN(d.getTime());
-      const summary = truncate(
-        stripHtml(asText(it.description ?? it.summary ?? it["content:encoded"] ?? it.content)),
-        160
+      const rawDesc = asText(
+        it["content:encoded"] ?? it.description ?? it.content ?? it.summary
       );
+      const summary = truncate(stripHtml(rawDesc), 160);
       return {
         title,
         link,
@@ -110,6 +135,7 @@ export function parseFeed(xml: string, source: string): NewsItem[] {
         iso: valid ? d.toISOString() : "",
         date: valid ? formatDate(d) : "",
         summary,
+        image: extractImage(it, rawDesc),
       };
     })
     .filter((x) => x.title && x.link);
