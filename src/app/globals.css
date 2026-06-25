@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #070B14;
-  --color-surface: #0F1626;
-  --color-surface-2: #16203A;
-  --color-accent-cyan: #22D3EE;
-  --color-accent-blue: #2563EB;
-  --color-text: #E5E7EB;
-  --color-muted: #94A3B8;
-  --color-border: #1E293B;
-  --font-display: var(--font-space-grotesk);
-  --font-body: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
+  --color-bg: #ffffff;
+  --color-bg-subtle: #fafafa;
+  --color-ink: #0a0a0a;
+  --color-muted: #6b7280;
+  --color-border: #ececec;
+  --color-accent: #4f46e5;
+  --color-accent-soft: #eef2ff;
+  --color-accent-ink: #ffffff;
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
 }
 
 html {
@@ -21,23 +21,72 @@ html {
 
 body {
   background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
-.text-gradient {
-  background-image: linear-gradient(90deg, #22d3ee, #2563eb);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.mono-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--color-muted);
+}
+
+.serif-accent {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,6 +97,7 @@ h4 {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }
