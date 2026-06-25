@@ -4,6 +4,7 @@ import { Bento } from "@/components/sections/Bento";
 import { ProductFeatures } from "@/components/sections/ProductFeatures";
 import { Problem } from "@/components/sections/Problem";
 import { WhyATW } from "@/components/sections/WhyATW";
+import { Team } from "@/components/sections/Team";
 import { Terminal } from "@/components/sections/Terminal";
 import { Pricing } from "@/components/sections/Pricing";
 import { FAQ } from "@/components/sections/FAQ";
@@ -19,6 +20,7 @@ export default function Home() {
       <ProductFeatures />
       <Problem />
       <WhyATW />
+      <Team />
       <Terminal />
       <Pricing />
       <FAQ />
