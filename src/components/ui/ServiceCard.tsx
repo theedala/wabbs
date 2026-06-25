@@ -11,7 +11,6 @@ export function ServiceCard({ service }: { service: Service }) {
       <Icon className="h-8 w-8 text-accent-cyan" />
       <h3 className="mt-5 text-xl font-bold">{service.title}</h3>
       <p className="mt-3 text-muted">{service.description}</p>
-      {service.price && <p className="mt-5 font-mono text-sm text-accent-cyan">{service.price}</p>}
     </SpotlightCard>
   );
 }

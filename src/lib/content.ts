@@ -39,25 +39,131 @@ export const solution = {
     "Our intrusion detection and prevention system uses artificial intelligence to spot suspicious activity, raise instant alerts, and stop intrusions before they cause damage.",
 };
 
-export type Service = { title: string; description: string; price?: string; icon: "shield" | "radar" | "search" };
+export type ProductIcon = "radar" | "hardhat" | "fraud";
+export type Product = { title: string; blurb: string; bullets: string[]; icon: ProductIcon };
 
-export const services: Service[] = [
-  {
-    title: "Cybersecurity Consulting",
-    description: "Expert assessment and hardening of your organization's security posture.",
-    price: "$2,000 USD",
-    icon: "shield",
-  },
+export const products: Product[] = [
   {
     title: "AI Intrusion Detection & Prevention",
-    description: "Our flagship AI system that detects and blocks attacks in real time.",
-    price: "$5,000–$15,000 USD",
+    blurb:
+      "Our flagship system watches your network, spots suspicious activity, raises instant alerts, and blocks intrusions before they cause damage.",
+    bullets: [
+      "Real-time detection and automatic blocking",
+      "Resistant to obfuscation, fragmentation, and DoS evasion",
+      "Live alerts and a single monitoring dashboard",
+    ],
     icon: "radar",
   },
   {
-    title: "Digital Forensics",
-    description: "Investigation and evidence recovery after a security incident.",
+    title: "AI Mining Safety System",
+    blurb:
+      "AI monitoring built for mining operations — it flags hazardous conditions on site and protects workers in real time.",
+    bullets: [
+      "Continuous hazard and anomaly monitoring",
+      "Instant alerts to supervisors on the ground",
+      "Built for remote and high-risk environments",
+    ],
+    icon: "hardhat",
+  },
+  {
+    title: "AI Fraud Detection",
+    blurb:
+      "Detects fraudulent transactions and anomalous behaviour across financial systems the moment they happen.",
+    bullets: [
+      "Transaction-level anomaly scoring",
+      "Catches insider and account-takeover patterns",
+      "Reduces losses before money leaves the system",
+    ],
+    icon: "fraud",
+  },
+];
+
+export type Service = { title: string; description: string; icon: "shield" | "radar" | "search" };
+
+export const services: Service[] = [
+  {
+    title: "Forensic investigation services",
+    description: "Investigation and evidence recovery after a security incident or dispute.",
     icon: "search",
+  },
+  {
+    title: "Cyber security awareness training",
+    description: "Hands-on training that turns your staff into your first line of defense.",
+    icon: "shield",
+  },
+  {
+    title: "Installation of security applications & systems",
+    description: "Deployment and configuration of the tools that keep your organization protected.",
+    icon: "shield",
+  },
+  {
+    title: "Cyber security consultancy",
+    description: "Expert assessment and hardening of your organization's security posture.",
+    icon: "shield",
+  },
+  {
+    title: "Software development",
+    description: "Custom, secure software built around how your organization actually works.",
+    icon: "radar",
+  },
+  {
+    title: "Digital forensics & cyber security certifications",
+    description: "Accredited training and certification in digital forensics and cyber security.",
+    icon: "search",
+  },
+];
+
+export type PricingTier = {
+  name: string;
+  price: string;
+  blurb: string;
+  features: string[];
+  highlight?: boolean;
+};
+
+export const pricing: PricingTier[] = [
+  {
+    name: "Cybersecurity Consulting",
+    price: "$2,000",
+    blurb: "Assessment and hardening of your security posture.",
+    features: ["Full posture assessment", "Risk and gap report", "Remediation roadmap"],
+  },
+  {
+    name: "AI Intrusion Detection & Prevention",
+    price: "$5,000–$15,000",
+    blurb: "Our flagship AI system, deployed for your organization.",
+    features: [
+      "Real-time detection and blocking",
+      "Evasion-resistant AI engine",
+      "Alerting and dashboards",
+      "Local, hands-on support",
+    ],
+    highlight: true,
+  },
+  {
+    name: "Digital Forensics",
+    price: "Contact for quote",
+    blurb: "Investigation and evidence recovery after an incident.",
+    features: ["Incident investigation", "Evidence recovery", "Expert reporting"],
+  },
+];
+
+export const faqs: { q: string; a: string }[] = [
+  {
+    q: "What makes your AI intrusion detection different?",
+    a: "It's built to defeat the evasion techniques attackers actually use — obfuscation, IP fragmentation, denial-of-service, and account hijacking — not just known signatures.",
+  },
+  {
+    q: "Do you support institutions outside Harare?",
+    a: "Yes. We're based in Harare for fast, hands-on support, and we work with institutions across Zimbabwe, including remote and under-resourced areas.",
+  },
+  {
+    q: "Do you offer discounts for schools and clinics?",
+    a: "We offer significant discounts for schools, universities, and healthcare institutions in remote and under-resourced areas.",
+  },
+  {
+    q: "What happens after a security incident?",
+    a: "Our digital forensics team investigates the breach, recovers evidence, and delivers an expert report you can act on or take to court.",
   },
 ];
 
@@ -90,19 +196,23 @@ export const contact = {
   email: "alexandrawabbs@gmail.com",
   phone: "+263 77 112 7760",
   phoneHref: "+263771127760",
+  whatsappHref: "https://wa.me/263771127760",
+  address: "Stand 233 Charlotte Brooke, Borrowdale, Harare",
   location: "Harare, Zimbabwe",
 };
 
-export type SocialIconName = "linkedin" | "x" | "facebook" | "instagram" | "whatsapp";
+export type SocialIconName = "facebook" | "linkedin" | "tiktok" | "whatsapp";
 export type Social = { label: string; href: string; icon: SocialIconName };
 
-// hrefs intentionally left as "#" placeholders — fill in when the accounts exist.
 export const socials: Social[] = [
-  { label: "LinkedIn", href: "#", icon: "linkedin" },
-  { label: "X", href: "#", icon: "x" },
-  { label: "Facebook", href: "#", icon: "facebook" },
-  { label: "Instagram", href: "#", icon: "instagram" },
-  { label: "WhatsApp", href: "#", icon: "whatsapp" },
+  { label: "Facebook", href: "https://www.facebook.com/alexandra.wabatagore", icon: "facebook" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/alexandra-wabatagore-0169a1224",
+    icon: "linkedin",
+  },
+  { label: "TikTok", href: "https://vm.tiktok.com/ZS966pSLVNYpF-xSdMC/", icon: "tiktok" },
+  { label: "WhatsApp", href: "https://wa.me/263771127760", icon: "whatsapp" },
 ];
 
 export const legalLinks = [
