@@ -12,17 +12,14 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr] lg:gap-12">
           {/* Brand + socials */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="inline-flex items-center" aria-label={siteMeta.name}>
               <Image
-                src="/brand/atw-logo.png"
+                src="/brand/new_logo.png"
                 alt={siteMeta.name}
-                width={32}
-                height={32}
-                className="h-8 w-8 object-contain"
+                width={500}
+                height={500}
+                className="h-16 w-16 object-contain"
               />
-              <span className="text-base font-bold tracking-tight text-ink">
-                {siteMeta.shortName}
-              </span>
             </Link>
             <p className="mt-4 font-mono text-sm text-accent">{siteMeta.tagline}</p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">

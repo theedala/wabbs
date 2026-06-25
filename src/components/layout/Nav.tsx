@@ -27,15 +27,15 @@ export function Nav() {
       }`}
     >
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center" aria-label={siteMeta.name}>
           <Image
-            src="/brand/atw-logo.png"
+            src="/brand/new_logo.png"
             alt={siteMeta.name}
-            width={32}
-            height={32}
-            className="h-8 w-8 object-contain"
+            width={500}
+            height={500}
+            priority
+            className="h-11 w-11 object-contain"
           />
-          <span className="text-base font-bold tracking-tight text-ink">{siteMeta.shortName}</span>
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           {nav.map((l) => (
