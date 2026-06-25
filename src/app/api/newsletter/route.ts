@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { validateContact, buildEmail } from "@/lib/contact";
+import { validateNewsletter, buildNewsletterEmail } from "@/lib/newsletter";
 import { getTransport, mailTo, mailFrom } from "@/lib/mailer";
 
 export const runtime = "nodejs";
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors: ["Invalid request."] }, { status: 400 });
   }
 
-  const result = validateContact(body as Record<string, string>);
+  const result = validateNewsletter(body as Record<string, string>);
   if (!result.ok) {
     // Honeypot spam: pretend success so bots get no signal.
     if (result.errors.includes("spam")) return NextResponse.json({ ok: true });
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors: ["Email is not configured."] }, { status: 500 });
   }
 
-  const { subject, text } = buildEmail(result.data);
+  const { subject, text } = buildNewsletterEmail(result.data.email);
   try {
     await transport.sendMail({
       from: mailFrom(),
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
-      { ok: false, errors: ["Could not send your message. Please try again."] },
+      { ok: false, errors: ["Could not subscribe. Please try again."] },
       { status: 500 }
     );
   }
