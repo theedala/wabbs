@@ -1,42 +1,58 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { MonoLabel } from "@/components/ui/MonoLabel";
+import { SerifAccent } from "@/components/ui/SerifAccent";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { contact } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Contact — ATW Technologies & Forensics" };
 
 export default function ContactPage() {
-  const wa = `https://wa.me/${contact.phoneHref.replace("+", "")}`;
   return (
-    <section className="py-24">
-      <Container className="grid gap-12 md:grid-cols-2">
+    <section className="py-20 sm:py-28">
+      <Container className="grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
-          <SectionHeading eyebrow="GET IN TOUCH" title="Request a quote." />
-          <p className="mt-6 text-muted">
+          <MonoLabel className="text-accent">Get in touch</MonoLabel>
+          <h1 className="mt-5 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+            Let&apos;s <SerifAccent>secure</SerifAccent> your organization.
+          </h1>
+          <p className="mt-6 max-w-md text-lg text-muted">
             Tell us about your organization and what you need secured. We respond to every enquiry.
           </p>
-          <div className="mt-8 space-y-4 text-muted">
-            <a href={`mailto:${contact.email}`} className="flex items-center gap-3 hover:text-text">
-              <Mail className="h-5 w-5 text-accent-cyan" />
-              {contact.email}
+          <div className="mt-10 space-y-px overflow-hidden rounded-2xl border border-border bg-border">
+            <a
+              href={`mailto:${contact.email}`}
+              className="flex items-center gap-4 bg-bg px-5 py-4 text-ink transition-colors hover:bg-bg-subtle"
+            >
+              <Mail className="h-5 w-5 shrink-0 text-accent" />
+              <span className="break-all text-sm">{contact.email}</span>
             </a>
-            <a href={`tel:${contact.phoneHref}`} className="flex items-center gap-3 hover:text-text">
-              <Phone className="h-5 w-5 text-accent-cyan" />
-              {contact.phone}
+            <a
+              href={`tel:${contact.phoneHref}`}
+              className="flex items-center gap-4 bg-bg px-5 py-4 text-ink transition-colors hover:bg-bg-subtle"
+            >
+              <Phone className="h-5 w-5 shrink-0 text-accent" />
+              <span className="text-sm">{contact.phone}</span>
             </a>
-            <a href={wa} className="flex items-center gap-3 hover:text-text">
-              <MessageCircle className="h-5 w-5 text-accent-cyan" />
-              WhatsApp us
+            <a
+              href={contact.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 bg-bg px-5 py-4 text-ink transition-colors hover:bg-bg-subtle"
+            >
+              <MessageCircle className="h-5 w-5 shrink-0 text-accent" />
+              <span className="text-sm">WhatsApp us</span>
             </a>
-            <p className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-accent-cyan" />
-              {contact.location}
-            </p>
+            <div className="flex items-start gap-4 bg-bg px-5 py-4 text-ink">
+              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <span className="text-sm">{contact.address}</span>
+            </div>
           </div>
         </div>
-        <ContactForm />
+        <div className="rounded-2xl border border-border bg-bg-subtle p-6 sm:p-8">
+          <ContactForm />
+        </div>
       </Container>
     </section>
   );

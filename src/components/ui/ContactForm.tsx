@@ -35,11 +35,11 @@ export function ContactForm() {
   }
 
   const field =
-    "w-full rounded-lg border border-border bg-surface px-4 py-3 text-text placeholder:text-muted focus:border-accent-cyan focus:outline-none";
+    "w-full rounded-lg border border-border bg-bg px-4 py-3 text-ink placeholder:text-muted focus:border-accent focus:outline-none";
 
   if (status === "ok") {
     return (
-      <p className="rounded-lg border border-accent-cyan/40 bg-accent-cyan/10 p-6 text-accent-cyan">
+      <p className="rounded-xl border border-accent/30 bg-accent-soft p-6 text-accent">
         Thank you — your enquiry has been sent. We&apos;ll be in touch shortly.
       </p>
     );
@@ -63,7 +63,7 @@ export function ContactForm() {
       </select>
       <textarea name="message" placeholder="How can we help?" required rows={5} className={field} />
       {status === "error" && (
-        <ul className="rounded-lg border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-300">
+        <ul className="rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-600">
           {errors.map((er, i) => (
             <li key={i}>{er}</li>
           ))}
@@ -72,7 +72,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="rounded-full bg-accent-cyan px-6 py-3 font-medium text-bg transition-colors hover:bg-accent-cyan/90 disabled:opacity-60"
+        className="rounded-lg bg-accent px-6 py-3 font-medium text-accent-ink transition-colors hover:bg-accent/90 disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : "Send enquiry"}
       </button>

@@ -1,5 +1,5 @@
 import { Shield, Radar, Search } from "lucide-react";
-import { SpotlightCard } from "@/components/reactbits/SpotlightCard";
+import { HairlineCard } from "@/components/ui/HairlineCard";
 import type { Service } from "@/lib/content";
 
 const icons = { shield: Shield, radar: Radar, search: Search };
@@ -7,11 +7,12 @@ const icons = { shield: Shield, radar: Radar, search: Search };
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = icons[service.icon];
   return (
-    <SpotlightCard className="h-full rounded-2xl border border-border bg-surface p-8">
-      <Icon className="h-8 w-8 text-accent-cyan" />
-      <h3 className="mt-5 text-xl font-bold">{service.title}</h3>
-      <p className="mt-3 text-muted">{service.description}</p>
-      {service.price && <p className="mt-5 font-mono text-sm text-accent-cyan">{service.price}</p>}
-    </SpotlightCard>
+    <HairlineCard className="h-full">
+      <span className="grid h-10 w-10 place-items-center rounded-lg border border-border bg-bg-subtle text-accent">
+        <Icon className="h-5 w-5" />
+      </span>
+      <h3 className="mt-5 text-lg font-semibold tracking-tight text-ink">{service.title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-muted">{service.description}</p>
+    </HairlineCard>
   );
 }
